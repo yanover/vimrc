@@ -36,26 +36,18 @@ autocmd VimEnter * NERDTree | wincmd p
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 
+" Map F6 in order to toggle nerdTREE.
+nmap <F6> :NERDTreeToggle<CR>
+
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 
-" ===== Material Theme =====
+" ===== Theme =====
 
-if (has('nvim'))
-  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-endif
-
-if (has('termguicolors'))
-  set termguicolors
-endif
-
-let g:material_theme_style = 'darker'
-
-colorscheme material
+autocmd vimenter * ++nested colorscheme gruvbox
 
 " ===== Airline plugin =====
 
-let g:airline_theme = 'material'
-
+let g:airline_theme='gruvbox'
 
