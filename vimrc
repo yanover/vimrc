@@ -1,3 +1,12 @@
+" ===== Plugin install =====
+call plug#begin()
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'morhetz/gruvbox'
+
+call plug#end()
+
 " ===== Default options =====
 
 " Set 'nocompatible' to ward off unexpected things that your distro might
@@ -26,28 +35,35 @@ if has('mouse')
   set mouse=a
 endif
 
+" Disable bellsound
+set belloff=all
 
-" ===== NERDTree =====
+" ===== Pluggin Configuration =====
 
-" Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree | wincmd p
-
-" Start NERDTree when Vim is started without file arguments.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
-
-" Map F6 in order to toggle nerdTREE.
-nmap <F6> :NERDTreeToggle<CR>
-
-" Exit Vim if NERDTree is the only window remaining in the only tab.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
-
-" ===== Theme =====
-
-autocmd vimenter * ++nested colorscheme gruvbox
-
-" ===== Airline plugin =====
-
+" = AIRLINE
 let g:airline_theme='gruvbox'
+let g:airline_powerline_fonts = 1
+:helptags ~/.vim/plugged/vim-airline/doc
 
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+"Unicode symbols for the Status Line
+let g:airline_left_alt_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_alt_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.readonly = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+set laststatus=2
+set t_Co=256
+set notermguicolors
+set encoding=utf-8
+
+" - THEMES
+autocmd vimenter * ++nested colorscheme gruvbox
